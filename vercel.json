@@ -2,6 +2,11 @@
   "buildCommand": "chmod +x ./build.sh && ./build.sh",
   "outputDirectory": "build/web",
   "routes": [
+    { "handle": "filesystem" },
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/flutter_service_worker.js", "dest": "/flutter_service_worker.js" },
+    { "src": "/main.dart.js", "dest": "/main.dart.js" },
+    { "src": "/flutter.js", "dest": "/flutter.js" },
     { "src": "/(.*)", "dest": "/index.html" }
   ],
   "github": {

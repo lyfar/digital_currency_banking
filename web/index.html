@@ -73,7 +73,7 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = null;
+    const serviceWorkerVersion = "{{flutter_service_worker_version}}";
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
@@ -86,32 +86,27 @@
   </div>
 
   <script>
-    window.addEventListener('load', function(ev) {
-      // Detect if we've already loaded the main.dart.js
-      var scriptTag = document.querySelector('script[src="main.dart.js"]');
+    window.addEventListener('load', function() {
+      _flutter = {};
+      _flutter.loader = window.flutter;
       
-      // Download main.dart.js
-      if (!scriptTag) {
-        var scriptTag = document.createElement('script');
-        scriptTag.src = 'main.dart.js';
-        scriptTag.type = 'application/javascript';
-        document.body.append(scriptTag);
-      }
-
-      // Initialize Flutter
-      var flutter_web_sdk = document.querySelector('script[src="flutter.js"]');
-      
-      if (flutter_web_sdk) {
-        _flutter.loader.loadEntrypoint({
+      if (_flutter.loader) {
+        _flutter.loader.load({
           serviceWorker: {
             serviceWorkerVersion: serviceWorkerVersion,
-          },
-          onEntrypointLoaded: function(engineInitializer) {
-            engineInitializer.initializeEngine().then(function(appRunner) {
-              appRunner.runApp();
-              // Hide loading indicator when app is loaded
-              document.getElementById('loading').style.display = 'none';
-            });
+          }
+        })
+        .then(function(engineInitializer) {
+          return engineInitializer.initializeEngine();
+        })
+        .then(function(appRunner) {
+          return appRunner.runApp();
+        })
+        .then(function() {
+          // Hide loading indicator when app is loaded
+          const loadingElement = document.getElementById('loading');
+          if (loadingElement) {
+            loadingElement.style.display = 'none';
           }
         });
       }

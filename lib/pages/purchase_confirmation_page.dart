@@ -309,7 +309,7 @@ class _PurchaseConfirmationPageState extends State<PurchaseConfirmationPage> {
   
   Widget _buildSuccessScreen(bool isDarkMode) {
     return Scaffold(
-      backgroundColor: isDarkMode ? HSBCColors.darkBackground : Colors.black,
+      backgroundColor: isDarkMode ? HSBCColors.darkBackground : Colors.white,
       appBar: HSBCDetailsAppBar(
         title: 'Purchase Complete',
         onBackPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
@@ -370,18 +370,18 @@ class _PurchaseConfirmationPageState extends State<PurchaseConfirmationPage> {
                     // Success message
                     Text(
                       'You bought ${NumberFormatter.formatCurrency(widget.amount)}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: isDarkMode ? Colors.white : HSBCColors.black,
                       ),
                     ),
                     Text(
                       'worth of ${widget.asset.symbol}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: isDarkMode ? Colors.white : HSBCColors.black,
                       ),
                     ),
                     
@@ -392,8 +392,9 @@ class _PurchaseConfirmationPageState extends State<PurchaseConfirmationPage> {
                       margin: const EdgeInsets.symmetric(horizontal: 24),
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.5),
+                        color: isDarkMode ? Colors.black.withOpacity(0.5) : Colors.grey.shade100,
                         borderRadius: BorderRadius.circular(12),
+                        border: !isDarkMode ? Border.all(color: Colors.grey.shade300) : null,
                       ),
                       child: Row(
                         children: [
@@ -414,12 +415,12 @@ class _PurchaseConfirmationPageState extends State<PurchaseConfirmationPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Set take-profit or stop-loss',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                                    color: isDarkMode ? Colors.white : HSBCColors.black,
                                   ),
                                 ),
                                 const SizedBox(height: 4),
@@ -427,7 +428,7 @@ class _PurchaseConfirmationPageState extends State<PurchaseConfirmationPage> {
                                   'Lock in your gains or limit your losses.',
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: Colors.grey.shade400,
+                                    color: isDarkMode ? Colors.grey.shade400 : Colors.grey.shade600,
                                   ),
                                 ),
                               ],
@@ -435,7 +436,7 @@ class _PurchaseConfirmationPageState extends State<PurchaseConfirmationPage> {
                           ),
                           Icon(
                             Icons.arrow_forward_ios,
-                            color: Colors.grey.shade400,
+                            color: isDarkMode ? Colors.grey.shade400 : Colors.grey.shade600,
                             size: 16,
                           ),
                         ],
@@ -484,8 +485,8 @@ class _PurchaseConfirmationPageState extends State<PurchaseConfirmationPage> {
                     height: 56,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey.shade800,
-                        foregroundColor: Colors.white,
+                        backgroundColor: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade200,
+                        foregroundColor: isDarkMode ? Colors.white : Colors.black87,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(28),
                         ),
@@ -495,12 +496,12 @@ class _PurchaseConfirmationPageState extends State<PurchaseConfirmationPage> {
                           const SnackBar(content: Text('Order details not implemented in this demo')),
                         );
                       },
-                      child: const Text(
+                      child: Text(
                         'View order',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
-                          color: Colors.white,
+                          color: isDarkMode ? Colors.white : Colors.black87,
                         ),
                       ),
                     ),

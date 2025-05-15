@@ -13,5 +13,8 @@ flutter config --enable-web
 # Get packages
 flutter pub get
 
-# Build web
-flutter build web --release 
+# Build web with base-href set to / for proper asset loading
+flutter build web --release --base-href=/
+
+# Fix permissions for web assets
+chmod -R 755 build/web/ 

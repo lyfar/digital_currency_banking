@@ -14,7 +14,7 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="$FLUTTER_BASE_HREF">
+  <base href="/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -24,6 +24,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="HSBC Digital">
+  <meta name="mobile-web-app-capable" content="yes">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- PWA Meta Tags -->
@@ -73,7 +74,7 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = "{{flutter_service_worker_version}}";
+    var serviceWorkerVersion = null;
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
@@ -87,29 +88,20 @@
 
   <script>
     window.addEventListener('load', function() {
+      // Download main.dart.js
       _flutter = {};
-      _flutter.loader = window.flutter;
+      var scriptTag = document.createElement('script');
+      scriptTag.src = 'main.dart.js';
+      scriptTag.type = 'application/javascript';
+      document.body.append(scriptTag);
       
-      if (_flutter.loader) {
-        _flutter.loader.load({
-          serviceWorker: {
-            serviceWorkerVersion: serviceWorkerVersion,
-          }
-        })
-        .then(function(engineInitializer) {
-          return engineInitializer.initializeEngine();
-        })
-        .then(function(appRunner) {
-          return appRunner.runApp();
-        })
-        .then(function() {
-          // Hide loading indicator when app is loaded
-          const loadingElement = document.getElementById('loading');
-          if (loadingElement) {
-            loadingElement.style.display = 'none';
-          }
-        });
-      }
+      // Hide loading once app is ready
+      window.setTimeout(function() {
+        const loadingElement = document.getElementById('loading');
+        if (loadingElement) {
+          loadingElement.style.display = 'none';
+        }
+      }, 5000); // Fallback timeout
     });
   </script>
 </body>

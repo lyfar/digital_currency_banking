@@ -240,7 +240,7 @@ class _WatchlistPageState extends State<WatchlistPage> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  '\$${asset.formattedPrice}',
+                  asset.formattedPrice,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

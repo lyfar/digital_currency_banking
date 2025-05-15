@@ -4,6 +4,7 @@ import '../services/digital_asset_service.dart';
 import '../models/digital_asset.dart';
 import '../services/transaction_service.dart';
 import '../widgets/activity_widget.dart';
+import '../utils/number_formatter.dart';
 
 class PortfolioPage extends StatefulWidget {
   const PortfolioPage({super.key});
@@ -106,7 +107,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '${_totalPortfolioValue.toStringAsFixed(2)} HKD',
+                    '${NumberFormatter.formatHKD(_totalPortfolioValue)}',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -133,7 +134,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              '${_totalGainLoss >= 0 ? '+' : ''}${_gainLossPercentage.toStringAsFixed(2)}%',
+                              NumberFormatter.formatPercentage(_gainLossPercentage),
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
@@ -145,7 +146,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        '${_totalGainLoss >= 0 ? '+' : ''}${_totalGainLoss.toStringAsFixed(2)} HKD today',
+                        '${_totalGainLoss >= 0 ? '+' : ''}${NumberFormatter.formatHKD(_totalGainLoss.abs())} today',
                         style: TextStyle(
                           fontSize: 14,
                           color: isDarkMode ? Colors.grey.shade400 : Colors.grey.shade700,
@@ -210,7 +211,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         ),
                       ),
                       Text(
-                        '26,809.54 HKD',
+                        NumberFormatter.formatHKD(26809.54),
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -231,7 +232,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         ),
                       ),
                       Text(
-                        '0.00 HKD',
+                        NumberFormatter.formatHKD(0.00),
                         style: TextStyle(
                           fontSize: 14,
                           color: isDarkMode ? Colors.grey.shade400 : Colors.grey.shade700,
@@ -402,7 +403,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${quantity.toStringAsFixed(quantity.truncateToDouble() == quantity ? 0 : 4)} ${asset.symbol}',
+                  '${NumberFormatter.formatNumber(quantity, decimalPlaces: quantity.truncateToDouble() == quantity ? 0 : 4)} ${asset.symbol}',
                   style: TextStyle(
                     fontSize: 14,
                     color: isDarkMode ? Colors.grey.shade400 : Colors.grey.shade600,
@@ -417,7 +418,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                '${value.toStringAsFixed(2)} HKD',
+                NumberFormatter.formatHKD(value),
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -434,7 +435,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     size: 16,
                   ),
                   Text(
-                    '${isPositiveChange ? '+' : ''}${asset.change24h.toStringAsFixed(2)}%',
+                    asset.changePercent,
                     style: TextStyle(
                       fontSize: 14,
                       color: changeColor,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/digital_asset.dart';
 import '../theme.dart';
 import '../widgets/hsbc_details_app_bar.dart';
+import '../utils/number_formatter.dart';
 
 class PurchaseConfirmationPage extends StatefulWidget {
   final DigitalAsset asset;
@@ -125,22 +126,22 @@ class _PurchaseConfirmationPageState extends State<PurchaseConfirmationPage> {
           // Asset and amount
           _buildSummaryRow(
             'Buying',
-            '${widget.assetQuantity.toStringAsFixed(8)} ${widget.asset.symbol}',
+            '${NumberFormatter.formatNumber(widget.assetQuantity, decimalPlaces: 8)} ${widget.asset.symbol}',
             isDarkMode,
           ),
           _buildSummaryRow(
             'Price',
-            '\$${widget.asset.formattedPrice}',
+            widget.asset.formattedPrice,
             isDarkMode,
           ),
           _buildSummaryRow(
             'Purchase amount',
-            '\$${widget.amount.toStringAsFixed(2)}',
+            NumberFormatter.formatCurrency(widget.amount),
             isDarkMode,
           ),
           _buildSummaryRow(
             'Fee',
-            '\$${fee.toStringAsFixed(2)}',
+            NumberFormatter.formatCurrency(fee),
             isDarkMode,
           ),
           
@@ -149,7 +150,7 @@ class _PurchaseConfirmationPageState extends State<PurchaseConfirmationPage> {
           // Total
           _buildSummaryRow(
             'Total',
-            '\$${total.toStringAsFixed(2)}',
+            NumberFormatter.formatCurrency(total),
             isDarkMode,
             isBold: true,
           ),
@@ -368,7 +369,7 @@ class _PurchaseConfirmationPageState extends State<PurchaseConfirmationPage> {
                     
                     // Success message
                     Text(
-                      'You bought \$${widget.amount.toStringAsFixed(2)}',
+                      'You bought ${NumberFormatter.formatCurrency(widget.amount)}',
                       style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,

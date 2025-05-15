@@ -1,3 +1,5 @@
+import '../utils/number_formatter.dart';
+
 class DigitalAsset {
   final String symbol;
   final String name;
@@ -15,9 +17,11 @@ class DigitalAsset {
     required this.volume24h,
   });
 
-  String get formattedPrice => price.toStringAsFixed(2);
-  String get formattedChange => change24h.toStringAsFixed(2);
-  String get changePercent => '${change24h >= 0 ? '+' : ''}${(change24h).toStringAsFixed(2)}%';
-  String get formattedMarketCap => marketCap.toStringAsFixed(2);
-  String get formattedVolume => volume24h.toStringAsFixed(2);
+  String get formattedPrice => NumberFormatter.formatCurrency(price);
+  String get formattedChange => NumberFormatter.formatNumber(change24h);
+  String get changePercent => NumberFormatter.formatPercentage(change24h);
+  String get formattedMarketCap => NumberFormatter.formatCurrency(marketCap);
+  String get formattedVolume => NumberFormatter.formatCurrency(volume24h);
+  String get compactMarketCap => NumberFormatter.formatCompactNumber(marketCap);
+  String get compactVolume => NumberFormatter.formatCompactNumber(volume24h);
 } 

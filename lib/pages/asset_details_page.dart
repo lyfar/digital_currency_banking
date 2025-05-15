@@ -241,7 +241,7 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
                     Row(
                       children: [
                         Text(
-                          '\$${_asset!.formattedPrice}',
+                          _asset!.formattedPrice,
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -373,13 +373,13 @@ class _AssetDetailsPageState extends State<AssetDetailsPage> {
                     _buildDataRow(
                       context, 
                       'Market Cap', 
-                      '\$${(_asset!.marketCap / 1000000).toStringAsFixed(2)}M', 
+                      _asset!.compactMarketCap, 
                       isDarkMode
                     ),
                     _buildDataRow(
                       context, 
                       '24h Volume', 
-                      '\$${(_asset!.volume24h / 1000000).toStringAsFixed(2)}M', 
+                      _asset!.compactVolume, 
                       isDarkMode
                     ),
                     _buildDataRow(

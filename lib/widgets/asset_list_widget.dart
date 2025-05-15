@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/digital_asset.dart';
 import '../theme.dart';
+import '../utils/number_formatter.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -184,11 +185,11 @@ class _AssetListWidgetState extends State<AssetListWidget> with TickerProviderSt
     // Format the volume with appropriate suffix (M for millions, B for billions)
     String formattedVolume = '';
     if (asset.volume24h >= 1000000000) {
-      formattedVolume = '\$${(asset.volume24h / 1000000000).toStringAsFixed(2)}B Vol';
+      formattedVolume = NumberFormatter.formatCurrency(asset.volume24h / 1000000000) + 'B Vol';
     } else if (asset.volume24h >= 1000000) {
-      formattedVolume = '\$${(asset.volume24h / 1000000).toStringAsFixed(2)}M Vol';
+      formattedVolume = NumberFormatter.formatCurrency(asset.volume24h / 1000000) + 'M Vol';
     } else {
-      formattedVolume = '\$${(asset.volume24h / 1000).toStringAsFixed(2)}K Vol';
+      formattedVolume = NumberFormatter.formatCurrency(asset.volume24h / 1000) + 'K Vol';
     }
 
     return AnimatedBuilder(
@@ -288,7 +289,7 @@ class _AssetListWidgetState extends State<AssetListWidget> with TickerProviderSt
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '\$${asset.formattedPrice}',
+                          asset.formattedPrice,
                           style: monospaceDigits(
                             TextStyle(
                               fontSize: 16,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/digital_asset.dart';
 import '../theme.dart';
 import '../widgets/hsbc_details_app_bar.dart';
+import '../utils/number_formatter.dart';
 import 'purchase_confirmation_page.dart';
 
 class PurchaseAmountPage extends StatefulWidget {
@@ -137,7 +138,7 @@ class _PurchaseAmountPageState extends State<PurchaseAmountPage> {
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      "That's ≈${assetQuantity.toStringAsFixed(8)} ${widget.asset.symbol}",
+                      "That's ≈${NumberFormatter.formatNumber(assetQuantity, decimalPlaces: 8)} ${widget.asset.symbol}",
                       style: TextStyle(
                         fontSize: 16,
                         color: isDarkMode ? Colors.grey.shade400 : Colors.grey.shade600,
@@ -184,7 +185,7 @@ class _PurchaseAmountPageState extends State<PurchaseAmountPage> {
                         ),
                       ),
                       Text(
-                        "\$${balance.toStringAsFixed(2)}",
+                        NumberFormatter.formatCurrency(balance),
                         style: TextStyle(
                           fontSize: 14,
                           color: isDarkMode ? Colors.grey.shade400 : Colors.grey.shade600,
@@ -318,7 +319,7 @@ class _PurchaseAmountPageState extends State<PurchaseAmountPage> {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
-          "\$$value",
+          NumberFormatter.formatCurrency(double.parse(value)),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,

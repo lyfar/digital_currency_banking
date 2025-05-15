@@ -1,4 +1,10 @@
 {
-  "buildCommand": "chmod +x ./build.sh && ./build.sh",
-  "outputDirectory": "build/web"
+  "version": 2,
+  "framework": null,
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "build/web",
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 } 

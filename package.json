@@ -1,0 +1,10 @@
+{
+  "name": "hsbc-digital-banking",
+  "version": "1.0.0",
+  "description": "A modern HSBC Digital Banking application built with Flutter",
+  "scripts": {
+    "install-flutter": "git clone https://github.com/flutter/flutter.git -b stable && export PATH=\"$PATH:`pwd`/flutter/bin\" && flutter precache",
+    "build": "export PATH=\"$PATH:`pwd`/flutter/bin\" && flutter build web --release",
+    "vercel-build": "npm run install-flutter && npm run build"
+  }
+} 

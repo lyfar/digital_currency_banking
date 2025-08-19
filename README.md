@@ -49,7 +49,6 @@ This project is deployed on Vercel. Visit [app-url.vercel.app](https://app-url.v
 
 - Flutter
 - Dart
-- Firebase (Authentication)
 - Provider (State Management)
 
 ## License
